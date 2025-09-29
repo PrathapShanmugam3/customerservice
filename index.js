@@ -24,8 +24,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 const db = require("./models");
 const Role = db.role;
 
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
+db.sequelize.sync().then(() => {
   initial();
 });
 
@@ -45,18 +44,24 @@ app.listen(PORT, () => {
 });
 
 function initial() {
-  Role.create({
-    id: 1,
-    name: "user"
+  Role.findOrCreate({
+    where: { id: 1 },
+    defaults: {
+      name: "user"
+    }
   });
  
-  Role.create({
-    id: 2,
-    name: "moderator"
+  Role.findOrCreate({
+    where: { id: 2 },
+    defaults: {
+      name: "moderator"
+    }
   });
  
-  Role.create({
-    id: 3,
-    name: "admin"
+  Role.findOrCreate({
+    where: { id: 3 },
+    defaults: {
+      name: "admin"
+    }
   });
 }
