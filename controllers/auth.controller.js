@@ -30,9 +30,15 @@ exports.signup = (req, res) => {
         });
       } else {
         // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
+        Role.findOne({
+          where: {
+            id: 1
+          }
+        }).then(role => {
+          user.setRoles([role]).then(() => {
+            res.send({ message: "User was registered successfully!" });
+          });
+        })
       }
     })
     .catch(err => {
