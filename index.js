@@ -24,7 +24,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 const db = require("./models");
 const Role = db.role;
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync().then(() => {
   initial();
 });
 
