@@ -1,11 +1,9 @@
 const db = require("../models");
-const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
 
 const Op = db.Sequelize.Op;
 
-var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
@@ -67,18 +65,9 @@ exports.signin = (req, res) => {
 
       if (!passwordIsValid) {
         return res.status(401).send({
-          accessToken: null,
           message: "Invalid Password!"
         });
       }
-
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: config.jwtExpiration
-      });
-
-      let refreshToken = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: config.jwtRefreshExpiration
-      });
 
       var authorities = [];
       user.getRoles().then(roles => {
@@ -89,36 +78,11 @@ exports.signin = (req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
-          roles: authorities,
-          accessToken: token,
-          refreshToken: refreshToken
+          roles: authorities
         });
       });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-};
-
-exports.refreshToken = (req, res) => {
-  const { refreshToken: requestToken } = req.body;
-
-  if (requestToken == null) {
-    return res.status(403).json({ message: "Refresh Token is required!" });
-  }
-
-  try {
-    let refreshToken = jwt.verify(requestToken, config.secret);
-
-    var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: config.jwtExpiration
-      });
-
-    return res.status(200).json({
-      accessToken: newAccessToken,
-      refreshToken: refreshToken,
-    });
-  } catch (err) {
-    return res.status(401).send({ message: "Unauthorized!" });
-  }
 };

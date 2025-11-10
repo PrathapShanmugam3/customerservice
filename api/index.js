@@ -36,9 +36,13 @@ app.get("/", (req, res) => {
 });
 
 // routes
-const customDataRoutes = require('../routes/customdata.routes');
-app.use('/api/customdata', customDataRoutes);
-
+require('../routes/auth.routes')(app);
+require('../routes/user.routes')(app);
+require('../routes/lead.routes')(app);
+require('../routes/vendor.routes')(app);
+require('../routes/lead_offer.routes')(app);
+require('../routes/review.routes')(app);
+require('../routes/customdata.routes.js')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
@@ -47,24 +51,8 @@ app.listen(PORT, () => {
 });
 
 function initial() {
-  Role.findOrCreate({
-    where: { id: 1 },
-    defaults: {
-      name: "user"
-    }
-  });
-
-  Role.findOrCreate({
-    where: { id: 2 },
-    defaults: {
-      name: "moderator"
-    }
-  });
-
-  Role.findOrCreate({
-    where: { id: 3 },
-    defaults: {
-      name: "admin"
-    }
-  });
+  Role.findOrCreate({ where: { id: 1 }, defaults: { name: "customer" } });
+  Role.findOrCreate({ where: { id: 2 }, defaults: { name: "operator" } });
+  Role.findOrCreate({ where: { id: 3 }, defaults: { name: "vendor" } });
+  Role.findOrCreate({ where: { id: 4 }, defaults: { name: "admin" } });
 }
