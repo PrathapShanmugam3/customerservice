@@ -11,7 +11,8 @@ var corsOptions = {
   origin: origins
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -30,7 +31,7 @@ db.sequelize.sync().then(() => {
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to grocery application." });
 });
 
 // routes
@@ -51,14 +52,14 @@ function initial() {
       name: "user"
     }
   });
- 
+
   Role.findOrCreate({
     where: { id: 2 },
     defaults: {
       name: "moderator"
     }
   });
- 
+
   Role.findOrCreate({
     where: { id: 3 },
     defaults: {
