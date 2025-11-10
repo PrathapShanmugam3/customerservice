@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
 const swaggerUi = require('swagger-ui-express');
-const specs = require('./swagger');
+const specs = require('../swagger');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-const db = require("./models");
+const db = require("../models");
 const Role = db.role;
 
 db.sequelize.sync().then(() => {
@@ -34,8 +34,9 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
+const customDataRoutes = require('../routes/customdata.routes');
+app.use('/api/customdata', customDataRoutes);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
