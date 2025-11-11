@@ -1,6 +1,10 @@
+
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
+  swaggerOptions: {
+    url: "/api-docs/swagger.json",
+  },
   definition: {
     openapi: '3.0.0',
     info: {
@@ -11,7 +15,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.API_URL || 'http://localhost:10000',
+        url: process.env.API_URL || 'http://localhost:3000',
       },
     ],
   },
