@@ -16,10 +16,10 @@ module.exports = function(app) {
    *     tags:
    *       - User
    *     name: All Access
-   *     summary: Returns a public content
+   *     summary: Public content
    *     responses:
    *       '200':
-   *         description: Public content returned successfully
+   *         description: Public content
    */
   app.get("/api/test/all", controller.allAccess);
 
@@ -30,14 +30,10 @@ module.exports = function(app) {
    *     tags:
    *       - User
    *     name: User Board
-   *     summary: Returns user content
-   *     security:
-   *       - bearerAuth: []
+   *     summary: User content
    *     responses:
    *       '200':
-   *         description: User content returned successfully
-   *       '401':
-   *         description: Unauthorized
+   *         description: User content
    */
   app.get("/api/test/user", controller.userBoard);
 
@@ -48,16 +44,10 @@ module.exports = function(app) {
    *     tags:
    *       - User
    *     name: Moderator Board
-   *     summary: Returns moderator content
-   *     security:
-   *       - bearerAuth: []
+   *     summary: Moderator content
    *     responses:
    *       '200':
-   *         description: Moderator content returned successfully
-   *       '401':
-   *         description: Unauthorized
-   *       '403':
-   *         description: Forbidden
+   *         description: Moderator content
    */
   app.get(
     "/api/test/mod",
@@ -71,16 +61,10 @@ module.exports = function(app) {
    *     tags:
    *       - User
    *     name: Admin Board
-   *     summary: Returns admin content
-   *     security:
-   *       - bearerAuth: []
+   *     summary: Admin content
    *     responses:
    *       '200':
-   *         description: Admin content returned successfully
-   *       '401':
-   *         description: Unauthorized
-   *       '403':
-   *         description: Forbidden
+   *         description: Admin content
    */
   app.get(
     "/api/test/admin",

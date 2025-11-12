@@ -9,6 +9,24 @@ module.exports = function(app) {
     next();
   });
 
-  // List vendors
+  /**
+   * @swagger
+   * /api/search/vendors:
+   *   get:
+   *     tags:
+   *       - Search
+   *     name: Search Vendors
+   *     summary: Searches for vendors based on a query
+   *     parameters:
+   *       - in: query
+   *         name: q
+   *         schema:
+   *           type: string
+   *         required: true
+   *         description: The search query
+   *     responses:
+   *       '200':
+   *         description: A list of vendors matching the search query
+   */
   app.get('/api/search/vendors', controller.searchVendors);
 };

@@ -21,9 +21,15 @@ const moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
 };
 
+console.log('--- In user.controller.js ---');
+console.log(module.exports);
+
 module.exports = {
   allAccess,
   userBoard,
   adminBoard,
   moderatorBoard
 };
+
+console.log('--- After exports in user.controller.js ---');
+console.log(module.exports);
