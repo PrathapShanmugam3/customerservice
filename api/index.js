@@ -44,14 +44,8 @@ app.get("/", (req, res) => {
 // routes
 require('../routes/auth.routes')(app);
 require('../routes/user.routes')(app);
-require('../routes/lead.routes')(app);
-require('../routes/vendor.routes')(app);
-require('../routes/lead_offer.routes')(app);
 require('../routes/review.routes')(app);
-require('../routes/customdata.routes.js')(app);
 require('../routes/booking.routes')(app);
-require('../routes/admin.routes')(app);
-require('../routes/search.routes')(app);
 require('../routes/service.routes')(app);
 
 // set port, listen for requests
