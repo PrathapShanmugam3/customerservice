@@ -1,4 +1,4 @@
-const controller = require("../controllers/review.controller");
+const controller = require("../controllers/search.controller");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -9,5 +9,6 @@ module.exports = function(app) {
     next();
   });
 
-  app.post("/api/reviews", controller.createReview);
+  // List vendors
+  app.get('/api/search/vendors', controller.searchVendors);
 };

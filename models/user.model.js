@@ -5,14 +5,24 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
-      type: Sequelize.STRING
+    name: {
+      type: Sequelize.STRING(150),
+      allowNull: false
+    },
+    phone: {
+      type: Sequelize.STRING(20),
+      unique: true
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING(150),
+      unique: true
     },
-    password: {
-      type: Sequelize.STRING
+    password_hash: {
+      type: Sequelize.STRING(255)
+    },
+    role: {
+      type: Sequelize.ENUM('user', 'vendor', 'admin'),
+      defaultValue: 'user'
     }
   });
 

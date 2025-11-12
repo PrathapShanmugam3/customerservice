@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Vendor = sequelize.define("vendors", {
+  const Booking = sequelize.define("bookings", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -11,8 +11,15 @@ module.exports = (sequelize, Sequelize) => {
       references: {
         model: 'users',
         key: 'id'
-      },
-      unique: true
+      }
+    },
+    vendor_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     service_id: {
       type: Sequelize.INTEGER,
@@ -22,14 +29,15 @@ module.exports = (sequelize, Sequelize) => {
         key: 'id'
       }
     },
-    verification_status: {
-      type: Sequelize.ENUM('pending', 'verified', 'rejected'),
-      defaultValue: 'pending'
+    booking_time: {
+      type: Sequelize.DATE,
+      allowNull: false
     },
-    availability: {
-      type: Sequelize.JSON
+    status: {
+      type: Sequelize.ENUM('scheduled', 'completed', 'cancelled'),
+      defaultValue: 'scheduled'
     }
   });
 
-  return Vendor;
+  return Booking;
 };

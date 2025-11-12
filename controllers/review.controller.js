@@ -1,18 +1,14 @@
 const db = require("../models");
 const Review = db.review;
 
-// Create a new review
 exports.createReview = (req, res) => {
-  const { leadId, vendorId, rating, comment } = req.body;
-
   Review.create({
-    lead_id: leadId,
-    vendor_id: vendorId,
-    rating: rating,
-    comment: comment
+    booking_id: req.body.booking_id,
+    rating: req.body.rating,
+    comment: req.body.comment
   })
     .then(review => {
-      res.status(201).send({ reviewId: review.id, message: "Review created" });
+      res.status(201).send(review);
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
