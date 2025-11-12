@@ -44,3 +44,19 @@ exports.updateBooking = (req, res) => {
       res.status(500).send({ message: "Error updating Booking with id=" + req.params.id });
     });
 };
+
+exports.confirmBooking = (req, res) => {
+  Booking.update({ status: 'confirmed' }, {
+    where: { id: req.params.id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({ message: "Booking was confirmed successfully." });
+      } else {
+        res.send({ message: `Cannot confirm Booking with id=${req.params.id}. Maybe Booking was not found!` });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: "Error confirming Booking with id=" + req.params.id });
+    });
+};
