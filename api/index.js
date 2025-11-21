@@ -21,13 +21,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
-    customCssUrl: "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css",
-    customJs: [
-      "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js",
-      "https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js"
-    ]
-  }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 const db = require("../models");
 const Role = db.role;
