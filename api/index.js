@@ -52,6 +52,10 @@ require('../routes/review.routes')(app);
 require('../routes/booking.routes')(app);
 require('../routes/service.routes')(app);
 require('../routes/shadowotp.routes')(app);
+require('../routes/admin.routes.js')(app);
+require('../routes/customdata.routes.js')(app);
+require('../routes/search.routes.js')(app);
+require('../routes/vendor.routes.js')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
