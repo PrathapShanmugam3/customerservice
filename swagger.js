@@ -1,10 +1,6 @@
-
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
-  swaggerOptions: {
-    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
-  },
   definition: {
     openapi: '3.0.0',
     info: {
