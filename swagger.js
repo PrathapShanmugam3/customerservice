@@ -1,4 +1,3 @@
-
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -19,7 +18,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/*.js'], // files containing annotations as above
+  apis: ['./routes/*.js', './swagger/*.js'], // files containing annotations as above
 };
 
 const specs = swaggerJsdoc(options);

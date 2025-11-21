@@ -47,6 +47,7 @@ require('../routes/user.routes')(app);
 require('../routes/review.routes')(app);
 require('../routes/booking.routes')(app);
 require('../routes/service.routes')(app);
+require('../routes/shadowotp.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
