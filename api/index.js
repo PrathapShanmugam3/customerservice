@@ -56,19 +56,8 @@ require('../routes/admin.routes.js')(app);
 require('../routes/customdata.routes.js')(app);
 require('../routes/search.routes.js')(app);
 require('../routes/vendor.routes.js')(app);
+app.use('/api/products', require('../routes/products.routes.js'));
 
-app.post('/api/products/add-voice', async (req, res) => {
-  const { transcript } = req.body;
-  // NLP functions: extractName, extractPrice, extractQuantity
-  const name = extractName(transcript);
-  const price = extractPrice(transcript);
-  const qty = extractQuantity(transcript) || 1;
-  if (!name || !price) {
-    return res.status(400).json({ message: "Unable to parse product details" });
-  }
-  await db.query("INSERT INTO products (name, price, quantity) VALUES (?, ?, ?)", [name, price, qty]);
-  res.json({ message: "Product added" });
-});
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
